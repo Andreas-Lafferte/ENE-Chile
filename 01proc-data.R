@@ -29,61 +29,443 @@ ene7 <- read.csv("input/ene2017_11.csv")
 ene8 <- read.csv("input/ene2018_11.csv")
 ene9 <- read.csv("input/ene2019_11.csv")
 
-# 4. Descriptivos generales ----
+# 4. Procesamiento ----
+
+# 2010 
+ene0$b2<- as.factor(ene0$b2)
+ene0$b5 <- as.factor(ene0$b5)
+ene0$activ <- as.factor(ene0$activ)
+ene0$b14 <- as_factor(ene0$b14)
+
+# 2011
+ene1$b2<- as.factor(ene1$b2)
+ene1$b5 <- as.factor(ene1$b5)
+ene1$activ <- as.factor(ene1$activ)
+ene1$b14 <- as_factor(ene1$b14)
+
+# 2012
+ene2$b2<- as.factor(ene2$b2)
+ene2$b5 <- as.factor(ene2$b5)
+ene2$activ <- as.factor(ene2$activ)
+ene2$b14 <- as_factor(ene2$b14)
+
+# 2013
+ene3$b2<- as.factor(ene3$b2)
+ene3$b5 <- as.factor(ene3$b5)
+ene3$activ <- as.factor(ene3$activ)
+ene3$b14_rev4cl_caenes <- as_factor(ene3$b14_rev4cl_caenes)
+
+# 2014
+ene4$b2<- as.factor(ene4$b2)
+ene4$b5 <- as.factor(ene4$b5)
+ene4$activ <- as.factor(ene4$activ)
+ene4$b14_rev4cl_caenes <- as_factor(ene4$b14_rev4cl_caenes)
+
+# 2015
+ene5$b2<- as.factor(ene5$b2)
+ene5$b5 <- as.factor(ene5$b5)
+ene5$activ <- as.factor(ene5$activ)
+ene5$b14_rev4cl_caenes <- as_factor(ene5$b14_rev4cl_caenes)
+
+# 2016
+ene6$b2<- as.factor(ene6$b2)
+ene6$b5 <- as.factor(ene6$b5)
+ene6$activ <- as.factor(ene6$activ)
+ene6$b14_rev4cl_caenes <- as_factor(ene6$b14_rev4cl_caenes)
+
+# 2017
+ene7$b2<- as.factor(ene7$b2)
+ene7$b5 <- as.factor(ene7$b5)
+ene7$activ <- as.factor(ene7$activ)
+ene7$b14_rev4cl_caenes <- as_factor(ene7$b14_rev4cl_caenes)
+
+# 2018
+ene8$b2<- as.factor(ene8$b2)
+ene8$b5 <- as.factor(ene8$b5)
+ene8$activ <- as.factor(ene8$activ)
+ene8$b14_rev4cl_caenes <- as_factor(ene8$b14_rev4cl_caenes)
+
+# 2019
+ene9$b2<- as.factor(ene9$b2)
+ene9$b5 <- as.factor(ene9$b5)
+ene9$activ <- as.factor(ene9$activ)
+ene9$b14_rev4cl_caenes <- as_factor(ene9$b14_rev4cl_caenes)
+
+# 4.1. Recodificar rama actividad económica ---- 
+
+# 2010
+ene0 <- ene0 %>% mutate(b14=case_when(b14==1 ~,
+                                      b14==2 ~,
+                                      b14==3 ~,
+                                      b14==4 ~,
+                                      b14==5 ~,
+                                      b14==6 ~,
+                                      b14==7 ~,
+                                      b14==8 ~,
+                                      b14==9 ~,
+                                      b14==10 ~,
+                                      b14==11 ~,
+                                      b14==12 ~,
+                                      b14==13 ~,
+                                      b14==14 ~,
+                                      b14==15 ~
+                                      b14==16 ~,
+                                      b14==17 ~,))
+
+# 2011
+ene1 <- ene1 %>% mutate(b14=case_when(b14==1 ~,
+                                      b14==2 ~,
+                                      b14==3 ~,
+                                      b14==4 ~,
+                                      b14==5 ~,
+                                      b14==6 ~,
+                                      b14==7 ~,
+                                      b14==8 ~,
+                                      b14==9 ~,
+                                      b14==10 ~,
+                                      b14==11 ~,
+                                      b14==12 ~,
+                                      b14==13 ~,
+                                      b14==14 ~,
+                                      b14==15 ~
+                                      b14==16 ~,
+                                      b14==17 ~,))
+
+# 2012 
+ene2 <- ene2 %>% mutate(b14=case_when(b14==1 ~,
+                                      b14==2 ~,
+                                      b14==3 ~,
+                                      b14==4 ~,
+                                      b14==5 ~,
+                                      b14==6 ~,
+                                      b14==7 ~,
+                                      b14==8 ~,
+                                      b14==9 ~,
+                                      b14==10 ~,
+                                      b14==11 ~,
+                                      b14==12 ~,
+                                      b14==13 ~,
+                                      b14==14 ~,
+                                      b14==15 ~
+                                      b14==16 ~,
+                                      b14==17 ~,))
+
+# 2013 
+ene3 <- ene3 %>% mutate(b14_rev4cl_caenes=case_when(b14_rev4cl_caenes==1 ~ "Agricultura y pesca",
+                                                    b14_rev4cl_caenes==2 ~ "Minería",
+                                                    b14_rev4cl_caenes==3 ~ "Industria",
+                                                    b14_rev4cl_caenes==4 ~ "Electricidad,  gas  y  agua",
+                                                    b14_rev4cl_caenes==5 ~ "Electricidad,  gas  y  agua", 
+                                                    b14_rev4cl_caenes==6 ~ "Construcción",
+                                                    b14_rev4cl_caenes==7 ~ "Comercio",
+                                                    b14_rev4cl_caenes==8 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==9 ~ "Servicios",
+                                                    b14_rev4cl_caenes==10 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==11 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==12 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==13 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==14 ~ "Servicios",
+                                                    b14_rev4cl_caenes==15 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==16 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==17 ~ "Servicios",
+                                                    b14_rev4cl_caenes==18 ~ "Servicios",
+                                                    b14_rev4cl_caenes==19 ~ "Servicios",
+                                                    b14_rev4cl_caenes==20 ~ "Servicios",
+                                                    b14_rev4cl_caenes==21 ~ "Servicios"))
 
 
-# 5. Procesamiento ----
+# 2014 
+ene4 <- ene4 %>% mutate(b14_rev4cl_caenes=case_when(b14_rev4cl_caenes==1 ~ "Agricultura y pesca",
+                                                    b14_rev4cl_caenes==2 ~ "Minería",
+                                                    b14_rev4cl_caenes==3 ~ "Industria",
+                                                    b14_rev4cl_caenes==4 ~ "Electricidad,  gas  y  agua",
+                                                    b14_rev4cl_caenes==5 ~ "Electricidad,  gas  y  agua", 
+                                                    b14_rev4cl_caenes==6 ~ "Construcción",
+                                                    b14_rev4cl_caenes==7 ~ "Comercio",
+                                                    b14_rev4cl_caenes==8 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==9 ~ "Servicios",
+                                                    b14_rev4cl_caenes==10 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==11 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==12 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==13 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==14 ~ "Servicios",
+                                                    b14_rev4cl_caenes==15 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==16 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==17 ~ "Servicios",
+                                                    b14_rev4cl_caenes==18 ~ "Servicios",
+                                                    b14_rev4cl_caenes==19 ~ "Servicios",
+                                                    b14_rev4cl_caenes==20 ~ "Servicios",
+                                                    b14_rev4cl_caenes==21 ~ "Servicios"))
 
-# 5.1. ----- Recodificar rama actividad ecÃ³nomica ---- 
 
-ene1$b14_rev4cl_caenes <- as_factor(ene1$b14_rev4cl_caenes)
-ene1 <- ene1 %>% mutate(b14_rev4cl_caenes=case_when(b14_rev4cl_caenes=="Agricultura, ganadería, silvicultura y pesca" ~ "Agricultura y pesca",
-                                                    b14_rev4cl_caenes=="Explotación de minas y canteras" ~ "Minería",
-                                                    b14_rev4cl_caenes=="Industrias manufactureras" ~ "Industria",
-                                                    b14_rev4cl_caenes=="Suministro de electricidad, gas, vapor y aire acondicionado" ~ "Electricidad,  gas  y  agua",
-                                                    b14_rev4cl_caenes=="Suministro de agua" ~ "Electricidad,  gas  y  agua", 
-                                                    b14_rev4cl_caenes=="Construcción" ~ "Construcción",
-                                                    b14_rev4cl_caenes=="Comercio al por mayor y al por menor" ~ "Comercio",
-                                                    b14_rev4cl_caenes=="Transporte y almacenamiento" ~ "Transporte y comunicaciones",
-                                                    b14_rev4cl_caenes=="Actividades de alojamiento y de servicio de comidas" ~ "Servicios",
-                                                    b14_rev4cl_caenes=="Información y comunicaciones" ~ "Transporte y comunicaciones",
-                                                    b14_rev4cl_caenes=="Actividades financieras y de seguros" ~ "Establecimientos financieros",
-                                                    b14_rev4cl_caenes=="Actividades inmobiliarias" ~ "Establecimientos financieros",
-                                                    b14_rev4cl_caenes=="Actividades profesionales, científicas y técnicas" ~ "Servicios", 
-                                                    b14_rev4cl_caenes=="Actividades de servicios administrativos y de apoyo" ~ "Servicios",
-                                                    b14_rev4cl_caenes=="Administración pública y defensa" ~ "Servicios", 
-                                                    b14_rev4cl_caenes=="Enseñanza" ~ "Servicios", 
-                                                    b14_rev4cl_caenes=="Actividades de atención de la salud humana y de asistencia social" ~ "Servicios",
-                                                    b14_rev4cl_caenes=="Actividades artósticas, de entretenimiento y recreativas" ~ "Actividades no especificadas",
-                                                    b14_rev4cl_caenes=="Otras actividades de servicios" ~ "Actividades no especificadas",
-                                                    b14_rev4cl_caenes=="Actividades de los hogares como empleadores" ~ "Actividades no especificadas"))
+# 2015
+ene5 <- ene5 %>% mutate(b14_rev4cl_caenes=case_when(b14_rev4cl_caenes==1 ~ "Agricultura y pesca",
+                                                    b14_rev4cl_caenes==2 ~ "Minería",
+                                                    b14_rev4cl_caenes==3 ~ "Industria",
+                                                    b14_rev4cl_caenes==4 ~ "Electricidad,  gas  y  agua",
+                                                    b14_rev4cl_caenes==5 ~ "Electricidad,  gas  y  agua", 
+                                                    b14_rev4cl_caenes==6 ~ "Construcción",
+                                                    b14_rev4cl_caenes==7 ~ "Comercio",
+                                                    b14_rev4cl_caenes==8 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==9 ~ "Servicios",
+                                                    b14_rev4cl_caenes==10 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==11 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==12 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==13 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==14 ~ "Servicios",
+                                                    b14_rev4cl_caenes==15 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==16 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==17 ~ "Servicios",
+                                                    b14_rev4cl_caenes==18 ~ "Servicios",
+                                                    b14_rev4cl_caenes==19 ~ "Servicios",
+                                                    b14_rev4cl_caenes==20 ~ "Servicios",
+                                                    b14_rev4cl_caenes==21 ~ "Servicios"))
 
-# group by b2 con b5 
-b <- ene1 %>% group_by(b14_rev4cl_caenes) %>% select(`b2`,
-                                                     `b5`, 
-                                                     `activ`)
 
-c <- b %>% filter(b5==2 | b5==3 & b2==2 | b2==3)
-class(b$b14_rev4cl_caenes)
-freq(b$b2)
-freq(c$b14_rev4cl_caenes)
+# 2016 
+ene6 <- ene6 %>% mutate(b14_rev4cl_caenes=case_when(b14_rev4cl_caenes==1 ~ "Agricultura y pesca",
+                                                    b14_rev4cl_caenes==2 ~ "Minería",
+                                                    b14_rev4cl_caenes==3 ~ "Industria",
+                                                    b14_rev4cl_caenes==4 ~ "Electricidad,  gas  y  agua",
+                                                    b14_rev4cl_caenes==5 ~ "Electricidad,  gas  y  agua", 
+                                                    b14_rev4cl_caenes==6 ~ "Construcción",
+                                                    b14_rev4cl_caenes==7 ~ "Comercio",
+                                                    b14_rev4cl_caenes==8 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==9 ~ "Servicios",
+                                                    b14_rev4cl_caenes==10 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==11 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==12 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==13 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==14 ~ "Servicios",
+                                                    b14_rev4cl_caenes==15 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==16 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==17 ~ "Servicios",
+                                                    b14_rev4cl_caenes==18 ~ "Servicios",
+                                                    b14_rev4cl_caenes==19 ~ "Servicios",
+                                                    b14_rev4cl_caenes==20 ~ "Servicios",
+                                                    b14_rev4cl_caenes==21 ~ "Servicios"))
 
-c %>% count(b14_rev4cl_caenes)
 
-cuadro1 <- c %>% add_count(b14_rev4cl_caenes) #Funciona pero para agrupar por rama se realiza un rbind
+# 2017 
+ene7 <- ene7 %>% mutate(b14_rev4cl_caenes=case_when(b14_rev4cl_caenes==1 ~ "Agricultura y pesca",
+                                                    b14_rev4cl_caenes==2 ~ "Minería",
+                                                    b14_rev4cl_caenes==3 ~ "Industria",
+                                                    b14_rev4cl_caenes==4 ~ "Electricidad,  gas  y  agua",
+                                                    b14_rev4cl_caenes==5 ~ "Electricidad,  gas  y  agua", 
+                                                    b14_rev4cl_caenes==6 ~ "Construcción",
+                                                    b14_rev4cl_caenes==7 ~ "Comercio",
+                                                    b14_rev4cl_caenes==8 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==9 ~ "Servicios",
+                                                    b14_rev4cl_caenes==10 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==11 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==12 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==13 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==14 ~ "Servicios",
+                                                    b14_rev4cl_caenes==15 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==16 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==17 ~ "Servicios",
+                                                    b14_rev4cl_caenes==18 ~ "Servicios",
+                                                    b14_rev4cl_caenes==19 ~ "Servicios",
+                                                    b14_rev4cl_caenes==20 ~ "Servicios",
+                                                    b14_rev4cl_caenes==21 ~ "Servicios"))
 
-cuadro2 <- rbind(
-  c('Actividades no especificadas', 2474),
-  c('Agricultura y pesca', 3735),
-  c('Comercio', 4712),
-  c('Construcci?n', 2150),
-  c('Electricidad,  gas  y  agua', 466),
-  c('Establecimientos financieros',  779),
-  c('Industria', 2723),
-  c('Miner?a', 1282),
-  c('Servicios', 5614),
-  c('Transporte y comunicaciones', 2151),
-  c('Total', 26086))%>% as.data.frame()
+# 2018 
+ene8 <- ene8 %>% mutate(b14_rev4cl_caenes=case_when(b14_rev4cl_caenes==1 ~ "Agricultura y pesca",
+                                                    b14_rev4cl_caenes==2 ~ "Minería",
+                                                    b14_rev4cl_caenes==3 ~ "Industria",
+                                                    b14_rev4cl_caenes==4 ~ "Electricidad,  gas  y  agua",
+                                                    b14_rev4cl_caenes==5 ~ "Electricidad,  gas  y  agua", 
+                                                    b14_rev4cl_caenes==6 ~ "Construcción",
+                                                    b14_rev4cl_caenes==7 ~ "Comercio",
+                                                    b14_rev4cl_caenes==8 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==9 ~ "Servicios",
+                                                    b14_rev4cl_caenes==10 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==11 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==12 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==13 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==14 ~ "Servicios",
+                                                    b14_rev4cl_caenes==15 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==16 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==17 ~ "Servicios",
+                                                    b14_rev4cl_caenes==18 ~ "Servicios",
+                                                    b14_rev4cl_caenes==19 ~ "Servicios",
+                                                    b14_rev4cl_caenes==20 ~ "Servicios",
+                                                    b14_rev4cl_caenes==21 ~ "Servicios"))
 
-names(cuadro2)<-c("Rama.Actividad.Econ?mica","asalariados.privados.tot")
+# 2019 
+ene9 <- ene9 %>% mutate(b14_rev4cl_caenes=case_when(b14_rev4cl_caenes==1 ~ "Agricultura y pesca",
+                                                    b14_rev4cl_caenes==2 ~ "Minería",
+                                                    b14_rev4cl_caenes==3 ~ "Industria",
+                                                    b14_rev4cl_caenes==4 ~ "Electricidad,  gas  y  agua",
+                                                    b14_rev4cl_caenes==5 ~ "Electricidad,  gas  y  agua", 
+                                                    b14_rev4cl_caenes==6 ~ "Construcción",
+                                                    b14_rev4cl_caenes==7 ~ "Comercio",
+                                                    b14_rev4cl_caenes==8 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==9 ~ "Servicios",
+                                                    b14_rev4cl_caenes==10 ~ "Transporte y comunicaciones",
+                                                    b14_rev4cl_caenes==11 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==12 ~ "Establecimientos financieros",
+                                                    b14_rev4cl_caenes==13 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==14 ~ "Servicios",
+                                                    b14_rev4cl_caenes==15 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==16 ~ "Servicios", 
+                                                    b14_rev4cl_caenes==17 ~ "Servicios",
+                                                    b14_rev4cl_caenes==18 ~ "Servicios",
+                                                    b14_rev4cl_caenes==19 ~ "Servicios",
+                                                    b14_rev4cl_caenes==20 ~ "Servicios",
+                                                    b14_rev4cl_caenes==21 ~ "Servicios"))
 
+# 4.2. Diseño muestral ----
+
+# 2010
+# 2011
+# 2012
+# 2013
+ene3 %>% filter(b5==2 | b5==3 & (b2==2|b2==3)) %>% select(fact_cal) %>% sum() # CÁLCULO SIN AGRUPAR POR RAMA
+
+ene3_pond <- ene3  %>% as_survey_design(ids = 1, strata = estrato, weights = fact_cal) # FACTORES DE EXPANSION
+
+a <- ene3_pond %>% 
+  group_by(activ) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # COMPROBAR 
+
+a <- ene3_pond %>% 
+  group_by(b14_rev4cl_caenes) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # CÁLCULO AGRUPANDO POR RAMAS
+
+# 2014
+ene4 %>% filter(b5==2 | b5==3 & (b2==2|b2==3)) %>% select(fact_cal) %>% sum() # CÁLCULO SIN AGRUPAR POR RAMA
+
+ene4_pond <- ene4  %>% as_survey_design(ids = 1, strata = estrato, weights = fact_cal) # FACTORES DE EXPANSION
+
+b <- ene4_pond %>% 
+  group_by(activ) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # COMPROBAR 
+
+b <- ene4_pond %>% 
+  group_by(b14_rev4cl_caenes) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # CÁLCULO AGRUPANDO POR RAMAS
+
+# 2015
+ene5 %>% filter(b5==2 | b5==3 & (b2==2|b2==3)) %>% select(fact_cal) %>% sum() # CÁLCULO SIN AGRUPAR POR RAMA
+
+ene5_pond <- ene5  %>% as_survey_design(ids = 1, strata = estrato, weights = fact_cal) # FACTORES DE EXPANSION
+
+c <- ene5_pond %>% 
+  group_by(activ) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # COMPROBAR 
+
+c <- ene5_pond %>% 
+  group_by(b14_rev4cl_caenes) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # CÁLCULO AGRUPANDO POR RAMAS
+
+# 2016
+ene6 %>% filter(b5==2 | b5==3 & (b2==2|b2==3)) %>% select(fact_cal) %>% sum() # CÁLCULO SIN AGRUPAR POR RAMA
+
+ene6_pond <- ene6  %>% as_survey_design(ids = 1, strata = estrato, weights = fact_cal) # FACTORES DE EXPANSION
+
+d <- ene6_pond %>% 
+  group_by(activ) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # COMPROBAR 
+
+d <- ene6_pond %>% 
+  group_by(b14_rev4cl_caenes) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # CÁLCULO AGRUPANDO POR RAMAS
+
+# 2017
+ene7 %>% filter(b5==2 | b5==3 & (b2==2|b2==3)) %>% select(fact_cal) %>% sum() # CÁLCULO SIN AGRUPAR POR RAMA
+
+ene7_pond <- ene7  %>% as_survey_design(ids = 1, strata = estrato, weights = fact_cal) # FACTORES DE EXPANSION
+
+e <- ene7_pond %>% 
+  group_by(activ) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # COMPROBAR 
+
+e <- ene7_pond %>% 
+  group_by(b14_rev4cl_caenes) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # CÁLCULO AGRUPANDO POR RAMAS
+
+# 2018
+ene8 %>% filter(b5==2 | b5==3 & (b2==2|b2==3)) %>% select(fact_cal) %>% sum() # CÁLCULO SIN AGRUPAR POR RAMA
+
+ene8_pond <- ene8  %>% as_survey_design(ids = 1, strata = estrato, weights = fact_cal) # FACTORES DE EXPANSION
+
+f <- ene8_pond %>% 
+  group_by(activ) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # COMPROBAR 
+
+f <- ene8_pond %>% 
+  group_by(b14_rev4cl_caenes) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # CÁLCULO AGRUPANDO POR RAMAS
+
+# 2019
+ene9 %>% filter(b5==2 | b5==3 & (b2==2|b2==3)) %>% select(fact_cal) %>% sum() # CÁLCULO SIN AGRUPAR POR RAMA
+
+ene9_pond <- ene9  %>% as_survey_design(ids = 1, strata = estrato, weights = fact_cal) # FACTORES DE EXPANSION
+
+g <- ene9_pond %>% 
+  group_by(activ) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # COMPROBAR 
+
+g <- ene9_pond %>% 
+  group_by(b14_rev4cl_caenes) %>%  filter(b5==2 | b5==3 & (b2==2|b2==3)) %>%
+  summarize(frecuencias = survey_total(na.rm = T),
+            proporcion = survey_mean(vartype = "ci", level = 0.95, na.rm = TRUE),
+            n = unweighted(n())) # CÁLCULO AGRUPANDO POR RAMAS
+
+# 5. Unir data ---- 
+
+# 5.1. Limpiar data ponderada ----
+a <- a[-c(3,4,5,6,7)]
+b <- b[-c(3,4,5,6,7)]
+c <- c[-c(3,4,5,6,7)]
+d <- d[-c(3,4,5,6,7)]
+e <- e[-c(3,4,5,6,7)]
+f <- f[-c(3,4,5,6,7)]
+g <- g[-c(3,4,5,6,7)] 
+# FALTAN AÑOS 2010 A 2012 
+
+# 5.2. Names ---- 
+names(a)<-c("Rama.Actividad.Económica","2013")
+names(b)<-c("Rama.Actividad.Económica","2014")
+names(c)<-c("Rama.Actividad.Económica","2015")
+names(d)<-c("Rama.Actividad.Económica","2016")
+names(e)<-c("Rama.Actividad.Económica","2017")
+names(f)<-c("Rama.Actividad.Económica","2018")
+names(g)<-c("Rama.Actividad.Económica","2019")
+
+# 5.3. Merge ----
+cuadro2013_2014 <- merge(a, b, by = "Rama.Actividad.Económica", all.x = T)
+cuadro2015_2016 <- merge(c, d, by = "Rama.Actividad.Económica", all.x = T)
+cuadro2017_2018 <- merge(e, f, by = "Rama.Actividad.Económica", all.x = T)
+cuadro2013_2019 <- merge(cuadro2013_2014, cuadro2015_2016, by = "Rama.Actividad.Económica", all.x = T)
+cuadro2013_2019 <- merge(cuadro2013_2019, cuadro2017_2018, by = "Rama.Actividad.Económica", all.x = T)
+cuadro2013_2019 <- merge(cuadro2013_2019, g, by = "Rama.Actividad.Económica", all.x = T)
+
+# 6. Export ----
