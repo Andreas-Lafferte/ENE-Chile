@@ -27,6 +27,9 @@ c <- read.xlsx("input/1. OOSS.xlsx",sheet = 19,rows=c(3:26),cols=c(1:4),na.strin
 
 # 3. Procesamiento ----
 
+# ENE
+ene <- ene[-c(11)]
+
 # 2010
 names(a) <- c("Rama.Actividad.Económica", "h8","m8","t8","h9","m9","t9","h10","m10","t10")
 a <- a[-c(2,3,4,5,6,7)]
@@ -45,9 +48,23 @@ c_tot <- c %>% select(1,4) # SOLO TOTALES
 names(c_tot) <- c("Rama.Actividad.Económica", "2018")
 
 # 3.1. Ramas ----
+#2010
+a_tot <- a_tot %>% add_row(Rama.Actividad.Económica="Agricultura y pesca",
+                           `2010`=sum(.$`2010`[1])) %>%
+  
+  add_row(Rama.Actividad.Económica="Transporte y comunicaciones",
+          `2010`=sum(.$`2010`[7])) %>%
+  
+  add_row(Rama.Actividad.Económica="Establecimientos financieros",
+          `2010`=sum(.$`2010`[8])) %>%
+  
+  add_row(Rama.Actividad.Económica="Actividades  no  especificadas",
+          `2010`=sum(.$`2010`[10]))
+
+a_tot <- a_tot[-c(8,10),]
 
 # 2011 a 2017
-cuadro1 <- b_tot %>% add_row(Rama.Actividad.Económica="Agricultura  y  pesca",
+cuadro1 <- b_tot %>% add_row(Rama.Actividad.Económica="Agricultura y pesca",
                                  `2011`=sum(.$`2011`[1]+.$`2011`[2]),
                                  `2012`=sum(.$`2012`[1]+.$`2012`[2]),
                                  `2013`=sum(.$`2013`[1]+.$`2013`[2]),
@@ -101,7 +118,7 @@ cuadro1 <- b_tot %>% add_row(Rama.Actividad.Económica="Agricultura  y  pesca",
           `2016`=sum(.$`2016`[7]+.$`2016`[8]),
           `2017`=sum(.$`2017`[7]+.$`2017`[8])) %>%
   
-  add_row(Rama.Actividad.Económica="Transporte  y  comunicaciones",
+  add_row(Rama.Actividad.Económica="Transporte y comunicaciones",
           `2011`=sum(.$`2011`[9]),
           `2012`=sum(.$`2012`[9]),
           `2013`=sum(.$`2013`[9]),
@@ -110,7 +127,7 @@ cuadro1 <- b_tot %>% add_row(Rama.Actividad.Económica="Agricultura  y  pesca",
           `2016`=sum(.$`2016`[9]),
           `2017`=sum(.$`2017`[9])) %>%
   
-  add_row(Rama.Actividad.Económica="Establecimientos  ftnancieros",
+  add_row(Rama.Actividad.Económica="Establecimientos financieros",
           `2011`=sum(.$`2011`[10]+.$`2011`[11]),
           `2012`=sum(.$`2012`[10]+.$`2012`[11]),
           `2013`=sum(.$`2013`[10]+.$`2013`[11]),
@@ -128,7 +145,7 @@ cuadro1 <- b_tot %>% add_row(Rama.Actividad.Económica="Agricultura  y  pesca",
           `2016`=sum(.$`2016`[12]+.$`2016`[13]+.$`2016`[14]+.$`2016`[15]+.$`2016`[16]+.$`2016`[17]),
           `2017`=sum(.$`2017`[12]+.$`2017`[13]+.$`2017`[14]+.$`2017`[15]+.$`2017`[16]+.$`2017`[17])) %>%
   
-  add_row(Rama.Actividad.Económica="Actividades  no  especiftcadas",
+  add_row(Rama.Actividad.Económica="Actividades  no  especificadas",
           `2011`=sum(.$`2011`[18]),
           `2012`=sum(.$`2012`[18]),
           `2013`=sum(.$`2013`[18]),
@@ -140,7 +157,7 @@ cuadro1 <- b_tot %>% add_row(Rama.Actividad.Económica="Agricultura  y  pesca",
 cuadro1 <- cuadro1[-c(1:18),] %>% as.data.frame()
 
 # 2018
-cuadro2 <- c_tot %>% add_row(Rama.Actividad.Económica="Agricultura  y  pesca",
+cuadro2 <- c_tot %>% add_row(Rama.Actividad.Económica="Agricultura y pesca",
                                  `2018`=sum(.$`2018`[1])) %>% 
   
   add_row(Rama.Actividad.Económica="Minería",
@@ -158,16 +175,16 @@ cuadro2 <- c_tot %>% add_row(Rama.Actividad.Económica="Agricultura  y  pesca",
   add_row(Rama.Actividad.Económica="Comercio",
           `2018`=sum(.$`2018`[7]+.$`2018`[9])) %>%
   
-  add_row(Rama.Actividad.Económica="Transporte  y  comunicaciones",
+  add_row(Rama.Actividad.Económica="Transporte y comunicaciones",
           `2018`=sum(.$`2018`[8]+.$`2018`[10])) %>%
   
-  add_row(Rama.Actividad.Económica="Establecimientos  ftnancieros",
+  add_row(Rama.Actividad.Económica="Establecimientos financieros",
           `2018`=sum(.$`2018`[11]+.$`2018`[12])) %>%
   
   add_row(Rama.Actividad.Económica="Servicios",
           `2018`=sum(.$`2018`[13]+.$`2018`[14]+.$`2018`[15]+.$`2018`[16]+.$`2018`[17]+.$`2018`[18]+.$`2018`[19]+.$`2018`[20]+.$`2018`[21])) %>%
   
-  add_row(Rama.Actividad.Económica="Actividades  no  especiftcadas",
+  add_row(Rama.Actividad.Económica="Actividades  no  especificadas",
           `2018`=sum(.$`2018`[22]))
 
 cuadro2 <- cuadro2[-c(1:22),]
@@ -177,3 +194,16 @@ afi_tot <- merge(a_tot, cuadro1, by = "Rama.Actividad.Económica", all.x = T)
 afi_tot <- merge(afi_tot, cuadro2, by = "Rama.Actividad.Económica", all.x = T)
 
 # 3.3. Tasa sindicalización privada ---- 
+tasa_sindi <- merge(ene, afi_tot, by = "Rama.Actividad.Económica", all.x = T)
+
+tasa_sindi <- tasa_sindi %>% mutate(tasa_sindi_2010=2010.y*100/2010.x,
+                                    tasa_sindi_2011=2011.y*100/2011.x,
+                                    tasa_sindi_2012=2012.y*100/2012.x,
+                                    tasa_sindi_2013=2013.y*100/2013.x,
+                                    tasa_sindi_2014=2014.y*100/2014.x,
+                                    tasa_sindi_2015=2015.y*100/2015.x,
+                                    tasa_sindi_2016=2016.y*100/2016.x,
+                                    tasa_sindi_2017=2017.y*100/2017.x,
+                                    tasa_sindi_2018=2018.y*100/2018.x) %>% as.data.frame()
+
+# 4. Export ----
