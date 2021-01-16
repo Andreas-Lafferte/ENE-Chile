@@ -8,7 +8,7 @@ options(scipen=999)
 # 2. Cargar bases de datos ----
 
 # ENE
-cuadro2010_2019 <- load("input/cuadro2010_2019.RData")
+cuadro2010-2019 <- load("input/cuadro2010_2019.RData")
 ene <- cuadro2010_2019
 
 # OOSS DT
@@ -137,7 +137,7 @@ cuadro1 <- b_tot %>% add_row(Rama.Actividad.Económica="Agricultura y pesca",
           `2017`=sum(.$`2017`[10]+.$`2017`[11])) %>%
   
   add_row(Rama.Actividad.Económica="Servicios",
-          `2011`=sum(.$`2011`[12]+.$`2011`[13]+.$`2011`[14]+.$`2011`[15]+.$`2011`[16]+.$`2011`[17]),
+          `2011`=sum(.$`2011`[12]+.$`2011`[13]+.$`2011`[14]+.$`2011`[15]+.$`2011`[17]),
           `2012`=sum(.$`2012`[12]+.$`2012`[13]+.$`2012`[14]+.$`2012`[15]+.$`2012`[16]+.$`2012`[17]),
           `2013`=sum(.$`2013`[12]+.$`2013`[13]+.$`2013`[14]+.$`2013`[15]+.$`2013`[16]+.$`2013`[17]),
           `2014`=sum(.$`2014`[12]+.$`2014`[13]+.$`2014`[14]+.$`2014`[15]+.$`2014`[16]+.$`2014`[17]),
@@ -196,14 +196,23 @@ afi_tot <- merge(afi_tot, cuadro2, by = "Rama.Actividad.Económica", all.x = T)
 # 3.3. Tasa sindicalización privada ---- 
 tasa_sindi <- merge(ene, afi_tot, by = "Rama.Actividad.Económica", all.x = T)
 
-tasa_sindi <- tasa_sindi %>% mutate(tasa_sindi_2010=2010.y*100/2010.x,
-                                    tasa_sindi_2011=2011.y*100/2011.x,
-                                    tasa_sindi_2012=2012.y*100/2012.x,
-                                    tasa_sindi_2013=2013.y*100/2013.x,
-                                    tasa_sindi_2014=2014.y*100/2014.x,
-                                    tasa_sindi_2015=2015.y*100/2015.x,
-                                    tasa_sindi_2016=2016.y*100/2016.x,
-                                    tasa_sindi_2017=2017.y*100/2017.x,
-                                    tasa_sindi_2018=2018.y*100/2018.x) %>% as.data.frame()
+names(tasa_sindi) <- c("Rama.Actividad.Económica", "ocup_2010", "ocup_2011", "ocup_2012", "ocup_2013", "ocup_2014", "ocup_2015",
+                       "ocup_2016", "ocup_2017", "ocup_2018", "afi_2010", "afi_2011", "afi_2012", "afi_2013", "afi_2014", "afi_2015", 
+                       "afi_2016", "afi_2017", "afi_2018")
+
+tasa_sindi <- tasa_sindi %>% mutate(tasa_sindi_2010=afi_2010*100/(ocup_2010),
+                                    tasa_sindi_2011=afi_2011*100/(ocup_2011),
+                                    tasa_sindi_2012=afi_2012*100/(ocup_2012),
+                                    tasa_sindi_2013=afi_2013*100/(ocup_2013),
+                                    tasa_sindi_2014=afi_2014*100/(ocup_2014),
+                                    tasa_sindi_2015=afi_2015*100/(ocup_2015),
+                                    tasa_sindi_2016=afi_2016*100/(ocup_2016),
+                                    tasa_sindi_2017=afi_2017*100/(ocup_2017),
+                                    tasa_sindi_2018=afi_2018*100/(ocup_2018)) %>% as.data.frame()
+
+tasa_sindi_INE <- tasa_sindi[-c(2:19)]
+tasa_sindi_INE[,-1] <-round(tasa_sindi_INE[,-1],2)
 
 # 4. Export ----
+write_xlsx(tasa_sindi,"output/tasas_sindi_privados_rama.xlsx", col_names = TRUE,format_headers = TRUE)
+write_xlsx(tasa_sindi_INE,"output/tasas_privados_INE.xlsx", col_names = TRUE,format_headers = TRUE)
