@@ -688,29 +688,88 @@ t <- t[-c(3,4,5,6,7)]
 
 # 5.2. Names ---- 
 # MUJERES
-names(a)<-c("Rama.Actividad.Económica","MUJ_2013")
-names(b)<-c("Rama.Actividad.Económica","MUJ_2014")
-names(c)<-c("Rama.Actividad.Económica","MUJ_2015")
-names(d)<-c("Rama.Actividad.Económica","MUJ_2016")
-names(e)<-c("Rama.Actividad.Económica","MUJ_2017")
-names(f)<-c("Rama.Actividad.Económica","MUJ_2018")
-names(g)<-c("Rama.Actividad.Económica","MUJ_2019")
+names(a)<-c("Rama.Actividad.Económica","2013")
+names(b)<-c("Rama.Actividad.Económica","2014")
+names(c)<-c("Rama.Actividad.Económica","2015")
+names(d)<-c("Rama.Actividad.Económica","2016")
+names(e)<-c("Rama.Actividad.Económica","2017")
+names(f)<-c("Rama.Actividad.Económica","2018")
+names(g)<-c("Rama.Actividad.Económica","2019")
 # AÑOS 2010 A 2012
-names(h)<-c("Rama.Actividad.Económica","MUJ_2010")
-names(i)<-c("Rama.Actividad.Económica","MUJ_2011")
-names(j)<-c("Rama.Actividad.Económica","MUJ_2012")
+names(h)<-c("Rama.Actividad.Económica","2010")
+names(i)<-c("Rama.Actividad.Económica","2011")
+names(j)<-c("Rama.Actividad.Económica","2012")
 
 #HOMBRES 
 # 5.2. Names ---- 
-names(k)<-c("Rama.Actividad.Económica","HOMB_2010")
-names(l)<-c("Rama.Actividad.Económica","HOMB_2011")
-names(m)<-c("Rama.Actividad.Económica","HOMB_2012")
-names(n)<-c("Rama.Actividad.Económica","HOMB_2013")
-names(o)<-c("Rama.Actividad.Económica","HOMB_2014")
-names(p)<-c("Rama.Actividad.Económica","HOMB_2015")
-names(q)<-c("Rama.Actividad.Económica","HOMB_2016")
-names(r)<-c("Rama.Actividad.Económica","HOMB_2017")
-names(s)<-c("Rama.Actividad.Económica","HOMB_2018")
-names(t)<-c("Rama.Actividad.Económica","HOMB_2019")
+names(k)<-c("Rama.Actividad.Económica","2010")
+names(l)<-c("Rama.Actividad.Económica","2011")
+names(m)<-c("Rama.Actividad.Económica","2012")
+names(n)<-c("Rama.Actividad.Económica","2013")
+names(o)<-c("Rama.Actividad.Económica","2014")
+names(p)<-c("Rama.Actividad.Económica","2015")
+names(q)<-c("Rama.Actividad.Económica","2016")
+names(r)<-c("Rama.Actividad.Económica","2017")
+names(s)<-c("Rama.Actividad.Económica","2018")
+names(t)<-c("Rama.Actividad.Económica","2019")
 
 # 5.3. Merge ----
+
+# MUJERES
+muj2010_2011 <- merge(h, i, by = "Rama.Actividad.Económica", all.x = T)
+muj2012_2013 <- merge(j, a, by = "Rama.Actividad.Económica", all.x = T)
+muj2014_2015 <- merge(b, c, by = "Rama.Actividad.Económica", all.x = T)
+muj2016_2017 <- merge(d, e, by = "Rama.Actividad.Económica", all.x = T)
+muj2018_2019 <- merge(f, g, by = "Rama.Actividad.Económica", all.x = T)
+muj2010_2019 <- merge(muj2010_2011, muj2012_2013, by = "Rama.Actividad.Económica", all.x = T)
+muj2010_2019 <- merge(muj2010_2019, muj2014_2015, by = "Rama.Actividad.Económica", all.x = T)
+muj2010_2019 <- merge(muj2010_2019, muj2016_2017, by = "Rama.Actividad.Económica", all.x = T)
+muj2010_2019 <- merge(muj2010_2019, muj2018_2019, by = "Rama.Actividad.Económica", all.x = T)
+
+muj2010_2019<- muj2010_2019 %>% add_row(Rama.Actividad.Económica="Total",
+                                              `2010`=sum(.$`2010`[1]+.$`2010`[2]+.$`2010`[3]+.$`2010`[4]+.$`2010`[5]+.$`2010`[6]+.$`2010`[7]+.$`2010`[8]+.$`2010`[9]),         
+                                              `2011`=sum(.$`2011`[1]+.$`2011`[2]+.$`2011`[3]+.$`2011`[4]+.$`2011`[5]+.$`2011`[6]+.$`2011`[7]+.$`2011`[8]+.$`2011`[9]),
+                                              `2012`=sum(.$`2012`[1]+.$`2012`[2]+.$`2012`[3]+.$`2012`[4]+.$`2012`[5]+.$`2012`[6]+.$`2012`[7]+.$`2012`[8]+.$`2012`[9]),
+                                              `2013`=sum(.$`2013`[1]+.$`2013`[2]+.$`2013`[3]+.$`2013`[4]+.$`2013`[5]+.$`2013`[6]+.$`2013`[7]+.$`2013`[8]+.$`2013`[9]),
+                                              `2014`=sum(.$`2014`[1]+.$`2014`[2]+.$`2014`[3]+.$`2014`[4]+.$`2014`[5]+.$`2014`[6]+.$`2014`[7]+.$`2014`[8]+.$`2014`[9]),
+                                              `2015`=sum(.$`2015`[1]+.$`2015`[2]+.$`2015`[3]+.$`2015`[4]+.$`2015`[5]+.$`2015`[6]+.$`2015`[7]+.$`2015`[8]+.$`2015`[9]),
+                                              `2016`=sum(.$`2016`[1]+.$`2016`[2]+.$`2016`[3]+.$`2016`[4]+.$`2016`[5]+.$`2016`[6]+.$`2016`[7]+.$`2016`[8]+.$`2016`[9]),
+                                              `2017`=sum(.$`2017`[1]+.$`2017`[2]+.$`2017`[3]+.$`2017`[4]+.$`2017`[5]+.$`2017`[6]+.$`2017`[7]+.$`2017`[8]+.$`2017`[9]),
+                                              `2018`=sum(.$`2018`[1]+.$`2018`[2]+.$`2018`[3]+.$`2018`[4]+.$`2018`[5]+.$`2018`[6]+.$`2018`[7]+.$`2018`[8]+.$`2018`[9]),
+                                              `2019`=sum(.$`2019`[1]+.$`2019`[2]+.$`2019`[3]+.$`2019`[4]+.$`2019`[5]+.$`2019`[6]+.$`2019`[7]+.$`2019`[8]+.$`2019`[9]))
+
+
+names(muj2010_2019) <- c("Rama.Actividad.Económica", "MUJ_2010", "MUJ_2011", "MUJ_2012", "MUJ_2013", "MUJ_2014", "MUJ_2015", "MUJ_2016", "MUJ_2017", "MUJ_2018", "MUJ_2019")
+
+# HOMBRES
+homb2010_2011 <- merge(k, l,  by = "Rama.Actividad.Económica", all.x = T)
+homb2012_2013 <- merge(m, n,  by = "Rama.Actividad.Económica", all.x = T)
+homb2014_2015 <- merge(o, p,  by = "Rama.Actividad.Económica", all.x = T)
+homb2016_2017 <- merge(q, r,  by = "Rama.Actividad.Económica", all.x = T)
+homb2018_2019 <- merge(s, t,  by = "Rama.Actividad.Económica", all.x = T)
+homb2010_2019 <- merge(homb2010_2011, homb2012_2013,  by = "Rama.Actividad.Económica", all.x = T)
+homb2010_2019 <- merge(homb2010_2019, homb2014_2015,  by = "Rama.Actividad.Económica", all.x = T)
+homb2010_2019 <- merge(homb2010_2019, homb2016_2017,  by = "Rama.Actividad.Económica", all.x = T)
+homb2010_2019 <- merge(homb2010_2019, homb2018_2019,  by = "Rama.Actividad.Económica", all.x = T)
+
+homb2010_2019<- homb2010_2019 %>% add_row(Rama.Actividad.Económica="Total",
+                                        `2010`=sum(.$`2010`[1]+.$`2010`[2]+.$`2010`[3]+.$`2010`[4]+.$`2010`[5]+.$`2010`[6]+.$`2010`[7]+.$`2010`[8]+.$`2010`[9]),         
+                                        `2011`=sum(.$`2011`[1]+.$`2011`[2]+.$`2011`[3]+.$`2011`[4]+.$`2011`[5]+.$`2011`[6]+.$`2011`[7]+.$`2011`[8]+.$`2011`[9]),
+                                        `2012`=sum(.$`2012`[1]+.$`2012`[2]+.$`2012`[3]+.$`2012`[4]+.$`2012`[5]+.$`2012`[6]+.$`2012`[7]+.$`2012`[8]+.$`2012`[9]),
+                                        `2013`=sum(.$`2013`[1]+.$`2013`[2]+.$`2013`[3]+.$`2013`[4]+.$`2013`[5]+.$`2013`[6]+.$`2013`[7]+.$`2013`[8]+.$`2013`[9]),
+                                        `2014`=sum(.$`2014`[1]+.$`2014`[2]+.$`2014`[3]+.$`2014`[4]+.$`2014`[5]+.$`2014`[6]+.$`2014`[7]+.$`2014`[8]+.$`2014`[9]),
+                                        `2015`=sum(.$`2015`[1]+.$`2015`[2]+.$`2015`[3]+.$`2015`[4]+.$`2015`[5]+.$`2015`[6]+.$`2015`[7]+.$`2015`[8]+.$`2015`[9]),
+                                        `2016`=sum(.$`2016`[1]+.$`2016`[2]+.$`2016`[3]+.$`2016`[4]+.$`2016`[5]+.$`2016`[6]+.$`2016`[7]+.$`2016`[8]+.$`2016`[9]),
+                                        `2017`=sum(.$`2017`[1]+.$`2017`[2]+.$`2017`[3]+.$`2017`[4]+.$`2017`[5]+.$`2017`[6]+.$`2017`[7]+.$`2017`[8]+.$`2017`[9]),
+                                        `2018`=sum(.$`2018`[1]+.$`2018`[2]+.$`2018`[3]+.$`2018`[4]+.$`2018`[5]+.$`2018`[6]+.$`2018`[7]+.$`2018`[8]+.$`2018`[9]),
+                                        `2019`=sum(.$`2019`[1]+.$`2019`[2]+.$`2019`[3]+.$`2019`[4]+.$`2019`[5]+.$`2019`[6]+.$`2019`[7]+.$`2019`[8]+.$`2019`[9]))
+
+names(homb2010_2019) <- c("Rama.Actividad.Económica", "HOMB_2010", "HOMB_2011", "HOMB_2012", "HOMB_2013", "HOMB_2014", "HOMB_2015", "HOMB_2016", "HOMB_2017", "HOMB_2018", "HOMB_2019")
+
+# TOTAL
+totsex2010_2019 <- merge(muj2010_2019, homb2010_2019, by = "Rama.Actividad.Económica", all.x = T)
+
+# 6. Export ----
+save(totsex2010_2019, file= "input/totsex2010_2019.RData")
+write_xlsx(homb2010_2019,"output/homb2010_2019.xlsx", col_names = TRUE,format_headers = TRUE)
+write_xlsx(muj2010_2019,"output/muj2010_2019.xlsx", col_names = TRUE,format_headers = TRUE)
